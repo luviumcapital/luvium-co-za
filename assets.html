@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assets - Luvium Capital Onboarding</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#f5f7fa; margin:0; }
+    .navbar { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color:#fff; padding:16px 24px; display:flex; justify-content:space-between; align-items:center; }
+    .navbar a, .navbar button { color:#fff; text-decoration:none; margin-left:16px; font-weight:600; background:transparent; border:1px solid rgba(255,255,255,0.6); padding:6px 12px; border-radius:6px; cursor:pointer; }
+    .container { max-width:1100px; margin:24px auto; padding:0 24px; }
+    .card { background:#fff; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.08); padding:24px; margin-bottom:24px; }
+    h1 { margin:0 0 8px; color:#333; }
+    .step { color:#667eea; font-weight:700; margin-bottom:16px; }
+    .form-row { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
+    .form-group { display:flex; flex-direction:column; }
+    label { margin:6px 0; color:#555; font-weight:600; }
+    input, select, textarea { padding:10px; border:1px solid #ddd; border-radius:6px; }
+    .btn-row { display:flex; gap:12px; margin-top:16px; flex-wrap:wrap; }
+    .btn { padding:10px 16px; border:none; border-radius:6px; font-weight:700; cursor:pointer; }
+    .btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color:#fff; }
+    .btn-secondary { background:#eceff1; color:#333; }
+    table { width:100%; border-collapse:collapse; margin-top:12px; }
+    th, td { border-bottom:1px solid #eee; padding:10px; text-align:left; font-size:14px; }
+    .status { font-size:12px; padding:4px 8px; border-radius:999px; }
+    .status.pending { background:#fff3cd; color:#856404; }
+    .status.saved { background:#d4edda; color:#155724; }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div><strong>LUVIUM CAPITAL</strong></div>
+    <div>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="business-info.html">Business Info</a>
+      <a href="documents.html">Documents</a>
+      <a href="assets.html">Assets</a>
+      <button onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <div class="step">STEP 4 OF 5</div>
+      <h1>Add Vehicle Assets</h1>
+      <div class="form-row">
+        <div class="form-group">
+          <label>VIN</label>
+          <input id="vin" placeholder="Vehicle Identification Number" />
+        </div>
+        <div class="form-group">
+          <label>Make</label>
+          <input id="make" />
+        </div>
+        <div class="form-group">
+          <label>Model</label>
+          <input id="model" />
+        </div>
+        <div class="form-group">
+          <label>Year</label>
+          <input id="year" type="number" />
+        </div>
+        <div class="form-group">
+          <label>Mileage (km)</label>
+          <input id="mileage" type="number" />
+        </div>
+        <div class="form-group">
+          <label>Purchase Price (R)</label>
+          <input id="price" type="number" />
+        </div>
+        <div class="form-group" style="grid-column:1 / -1;">
+          <label>Notes</label>
+          <textarea id="notes" rows="3" placeholder="Any additional details"></textarea>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="location.href='documents.html'">Back</button>
+        <button class="btn btn-primary" onclick="addAsset()">Add Asset</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Current Inventory</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>VIN</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>Mileage</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="assetsBody">
+        </tbody>
+      </table>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="completeApplication()">Submit for Approval</button>
+      </div>
+      <div id="alert" class="status" style="display:none"></div>
+    </div>
+  </div>
+
+  <script>
+    if (!localStorage.getItem('isLoggedIn')) {
+      window.location.href = 'login.html';
+    }
+
+    function addAsset(){
+      const asset = {
+        vin: document.getElementById('vin').value.trim(),
+        make: document.getElementById('make').value.trim(),
+        model: document.getElementById('model').value.trim(),
+        year: document.getElementById('year').value,
+        mileage: document.getElementById('mileage').value,
+        price: document.getElementById('price').value,
+        notes: document.getElementById('notes').value.trim(),
+        status: 'Saved'
+      };
+      if (!asset.vin || !asset.make || !asset.model){
+        showAlert('Please provide VIN, Make and Model to add an asset.', false);
+        return;
+      }
+      const assets = JSON.parse(localStorage.getItem('assets') || '[]');
+      assets.push(asset);
+      localStorage.setItem('assets', JSON.stringify(assets));
+      localStorage.setItem('assetsComplete', 'true');
+      renderAssets();
+      clearInputs();
+      showAlert('Asset saved.', true);
+    }
+
+    function renderAssets(){
+      const assets = JSON.parse(localStorage.getItem('assets') || '[]');
+      const body = document.getElementById('assetsBody');
+      if (!assets.length){
+        body.innerHTML = '<tr><td colspan="8">No assets added yet.</td></tr>';
+        return;
+      }
+      body.innerHTML = assets.map((a, i) => `
+        <tr>
+          <td>${a.vin}</td>
+          <td>${a.make}</td>
+          <td>${a.model}</td>
+          <td>${a.year}</td>
+          <td>${a.mileage}</td>
+          <td>R ${Number(a.price || 0).toLocaleString()}</td>
+          <td><span class="status saved">${a.status}</span></td>
+          <td><button class="btn btn-secondary" onclick="removeAsset(${i})">Remove</button></td>
+        </tr>
+      `).join('');
+    }
+
+    function removeAsset(index){
+      const assets = JSON.parse(localStorage.getItem('assets') || '[]');
+      assets.splice(index, 1);
+      localStorage.setItem('assets', JSON.stringify(assets));
+      renderAssets();
+    }
+
+    function completeApplication(){
+      // Notify via Brevo in production
+      localStorage.setItem('applicationComplete', 'true');
+      showAlert('Application submitted for approval. We will contact you shortly.', true);
+      setTimeout(() => location.href = 'dashboard.html', 1500);
+    }
+
+    function clearInputs(){
+      ['vin','make','model','year','mileage','price','notes'].forEach(id => document.getElementById(id).value = '');
+    }
+
+    function showAlert(msg, ok){
+      const a = document.getElementById('alert');
+      a.textContent = msg;
+      a.className = 'status ' + (ok ? 'saved' : 'pending');
+      a.style.display = 'inline-block';
+    }
+
+    function logout(){
+      localStorage.removeItem('isLoggedIn');
+      location.href = 'login.html';
+    }
+
+    renderAssets();
+  </script>
+</body>
+</html>
