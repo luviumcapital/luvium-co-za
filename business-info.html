@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Information - Luvium Capital Onboarding</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .navbar-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        .navbar-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .logout-btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid white;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        .form-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        .step-indicator {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        .form-section {
+            margin-bottom: 2rem;
+        }
+        .form-section h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #667eea;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .required {
+            color: #e74c3c;
+        }
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        button {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        button:hover {
+            transform: translateY(-2px);
+        }
+        .alert {
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        .alert.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">LUVIUM CAPITAL</div>
+        <div class="navbar-menu">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="business-info.html">Business Info</a>
+            <a href="documents.html">Documents</a>
+            <a href="assets.html">Assets</a>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="form-container">
+            <div class="step-indicator">STEP 2 OF 5</div>
+            <h1>Business Information</h1>
+            <div id="alert" class="alert"></div>
+            <form id="businessForm">
+                <div class="form-section">
+                    <h3>Company Details</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Legal Entity Name <span class="required">*</span></label>
+                            <input type="text" id="legalName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Trading Name <span class="required">*</span></label>
+                            <input type="text" id="tradingName" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Registration Number <span class="required">*</span></label>
+                            <input type="text" id="regNumber" required>
+                        </div>
+                        <div class="form-group">
+                            <label>VAT Number</label>
+                            <input type="text" id="vatNumber">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Years in Business <span class="required">*</span></label>
+                            <input type="number" id="yearsInBusiness" required min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Number of Employees</label>
+                            <input type="number" id="employees" min="1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Contact Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Primary Contact <span class="required">*</span></label>
+                            <input type="text" id="primaryContact" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Position/Title <span class="required">*</span></label>
+                            <input type="text" id="position" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Phone Number <span class="required">*</span></label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Physical Address <span class="required">*</span></label>
+                        <textarea id="address" rows="3" required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Banking Details</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Bank Name <span class="required">*</span></label>
+                            <input type="text" id="bankName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Account Holder Name <span class="required">*</span></label>
+                            <input type="text" id="accountHolder" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Account Number <span class="required">*</span></label>
+                            <input type="text" id="accountNumber" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Branch Code <span class="required">*</span></label>
+                            <input type="text" id="branchCode" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Business Operations</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Business Type <span class="required">*</span></label>
+                            <select id="businessType" required>
+                                <option value="">Select type</option>
+                                <option value="dealer">Car Dealer</option>
+                                <option value="retailer">Vehicle Retailer</option>
+                                <option value="wholesaler">Wholesaler</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Monthly Vehicle Turnover</label>
+                            <input type="number" id="turnover" min="0">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Dealership Description</label>
+                        <textarea id="description" rows="4" placeholder="Describe your business operations, types of vehicles you deal with, etc."></textarea>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn-secondary" onclick="location.href='dashboard.html'">Back to Dashboard</button>
+                    <button type="submit" class="btn-primary">Save & Continue</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'login.html';
+        }
+
+        // Load saved data if exists
+        const savedData = JSON.parse(localStorage.getItem('businessInfo') || '{}');
+        for (let key in savedData) {
+            const element = document.getElementById(key);
+            if (element) element.value = savedData[key];
+        }
+
+        document.getElementById('businessForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                legalName: document.getElementById('legalName').value,
+                tradingName: document.getElementById('tradingName').value,
+                regNumber: document.getElementById('regNumber').value,
+                vatNumber: document.getElementById('vatNumber').value,
+                yearsInBusiness: document.getElementById('yearsInBusiness').value,
+                employees: document.getElementById('employees').value,
+                primaryContact: document.getElementById('primaryContact').value,
+                position: document.getElementById('position').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                address: document.getElementById('address').value,
+                bankName: document.getElementById('bankName').value,
+                accountHolder: document.getElementById('accountHolder').value,
+                accountNumber: document.getElementById('accountNumber').value,
+                branchCode: document.getElementById('branchCode').value,
+                businessType: document.getElementById('businessType').value,
+                turnover: document.getElementById('turnover').value,
+                description: document.getElementById('description').value
+            };
+            
+            // Save to localStorage
+            localStorage.setItem('businessInfo', JSON.stringify(formData));
+            localStorage.setItem('businessInfoComplete', 'true');
+            
+            // Send notification email via Brevo
+            await sendNotificationEmail(formData);
+            
+            // Show success message
+            showAlert('Business information saved successfully!');
+            
+            setTimeout(() => {
+                window.location.href = 'documents.html';
+            }, 1500);
+        });
+
+        async function sendNotificationEmail(data) {
+            const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+            
+            // In production, this would call your backend API which connects to Brevo
+            const emailData = {
+                to: 'admin@luviumcapital.com',
+                subject: `Business Info Submitted - ${data.legalName}`,
+                content: `
+                    <h2>New Business Information Submission</h2>
+                    <p><strong>Company:</strong> ${data.legalName}</p>
+                    <p><strong>Contact:</strong> ${data.primaryContact}</p>
+                    <p><strong>Email:</strong> ${data.email}</p>
+                    <p><strong>Phone:</strong> ${data.phone}</p>
+                `
+            };
+            
+            console.log('Notification email would be sent:', emailData);
+            return Promise.resolve();
+        }
+
+        function showAlert(message) {
+            const alert = document.getElementById('alert');
+            alert.textContent = message;
+            alert.className = 'alert success';
+            alert.style.display = 'block';
+        }
+
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
