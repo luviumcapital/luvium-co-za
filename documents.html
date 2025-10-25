@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documents - Luvium Capital Onboarding</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f7fa; margin: 0; }
+    .navbar { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+    .navbar a, .navbar button { color: #fff; text-decoration: none; margin-left: 16px; font-weight: 600; background: transparent; border: 1px solid rgba(255,255,255,0.6); padding: 6px 12px; border-radius: 6px; cursor: pointer; }
+    .container { max-width: 1000px; margin: 24px auto; padding: 0 24px; }
+    .card { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 24px; margin-bottom: 24px; }
+    h1 { margin: 0 0 8px; color: #333; }
+    .step { color: #667eea; font-weight: 700; margin-bottom: 24px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .upload { border: 2px dashed #cfd8dc; border-radius: 10px; padding: 16px; text-align: center; }
+    .upload input { display: none; }
+    .upload label { display: block; cursor: pointer; color: #667eea; font-weight: 700; }
+    .doc-list { margin-top: 16px; font-size: 14px; color: #555; }
+    .btn-row { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+    .btn { padding: 10px 16px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; }
+    .btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; }
+    .btn-secondary { background: #eceff1; color: #333; }
+    .alert { padding: 12px; border-radius: 6px; display: none; margin-top: 12px; }
+    .alert.success { background: #d4edda; color: #155724; }
+    .req { color: #e74c3c; }
+    .doc-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dotted #eee; }
+    .doc-item:last-child { border-bottom: none; }
+    .status { font-size: 12px; padding: 4px 8px; border-radius: 999px; }
+    .status.pending { background: #fff3cd; color: #856404; }
+    .status.uploaded { background: #d4edda; color: #155724; }
+    @media (max-width: 600px){ .navbar{ flex-direction: column; gap: 8px;} }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div><strong>LUVIUM CAPITAL</strong></div>
+    <div>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="business-info.html">Business Info</a>
+      <a href="documents.html">Documents</a>
+      <a href="assets.html">Assets</a>
+      <button onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <div class="step">STEP 3 OF 5</div>
+      <h1>Upload Required Documents</h1>
+      <p>Please upload clear, readable copies of the following documents:</p>
+      <div class="grid" style="margin-top:16px;">
+        <div class="upload">
+          <p><strong>Company Registration (CIPC)</strong> <span class="req">*</span></p>
+          <input id="doc-cipc" type="file" accept=".pdf,.jpg,.jpeg,.png" />
+          <label for="doc-cipc">Choose file</label>
+          <div id="list-cipc" class="doc-list"></div>
+        </div>
+        <div class="upload">
+          <p><strong>Director ID/Passports</strong> <span class="req">*</span></p>
+          <input id="doc-ids" type="file" accept=".pdf,.jpg,.jpeg,.png" multiple />
+          <label for="doc-ids">Choose files</label>
+          <div id="list-ids" class="doc-list"></div>
+        </div>
+        <div class="upload">
+          <p><strong>Proof of Address (<=3 months)</strong> <span class="req">*</span></p>
+          <input id="doc-poa" type="file" accept=".pdf,.jpg,.jpeg,.png" />
+          <label for="doc-poa">Choose file</label>
+          <div id="list-poa" class="doc-list"></div>
+        </div>
+        <div class="upload">
+          <p><strong>Bank Statements (3 months)</strong> <span class="req">*</span></p>
+          <input id="doc-bank" type="file" accept=".pdf" />
+          <label for="doc-bank">Choose file</label>
+          <div id="list-bank" class="doc-list"></div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="location.href='business-info.html'">Back</button>
+        <button class="btn btn-primary" id="saveBtn">Save & Continue</button>
+      </div>
+      <div id="alert" class="alert"></div>
+    </div>
+
+    <div class="card">
+      <h2>Uploaded Documents</h2>
+      <div id="uploadedList"></div>
+    </div>
+  </div>
+
+  <script>
+    if (!localStorage.getItem('isLoggedIn')) {
+      window.location.href = 'login.html';
+    }
+
+    const inputs = {
+      cipc: document.getElementById('doc-cipc'),
+      ids: document.getElementById('doc-ids'),
+      poa: document.getElementById('doc-poa'),
+      bank: document.getElementById('doc-bank')
+    };
+
+    const lists = {
+      cipc: document.getElementById('list-cipc'),
+      ids: document.getElementById('list-ids'),
+      poa: document.getElementById('list-poa'),
+      bank: document.getElementById('list-bank')
+    };
+
+    Object.keys(inputs).forEach(key => {
+      inputs[key].addEventListener('change', () => handleFiles(key, inputs[key].files));
+    });
+
+    function handleFiles(key, files){
+      if (!files || !files.length){
+        lists[key].innerHTML = '';
+        return;
+      }
+      const items = Array.from(files).map(f => `<div class="doc-item"><span>${f.name}</span><span class="status uploaded">Selected</span></div>`).join('');
+      lists[key].innerHTML = items;
+    }
+
+    document.getElementById('saveBtn').addEventListener('click', async () => {
+      const requiredOk = inputs.cipc.files.length && inputs.ids.files.length && inputs.poa.files.length && inputs.bank.files.length;
+      if (!requiredOk){
+        showAlert('Please select all required documents before continuing.', false);
+        return;
+      }
+
+      // In a production flow, we would upload to a secure backend or object storage
+      // Here we simulate upload success and store simple metadata in localStorage
+      const docsMeta = {
+        cipc: Array.from(inputs.cipc.files).map(f => ({ name: f.name, size: f.size })),
+        ids: Array.from(inputs.ids.files).map(f => ({ name: f.name, size: f.size })),
+        poa: Array.from(inputs.poa.files).map(f => ({ name: f.name, size: f.size })),
+        bank: Array.from(inputs.bank.files).map(f => ({ name: f.name, size: f.size }))
+      };
+      localStorage.setItem('documentsMeta', JSON.stringify(docsMeta));
+      localStorage.setItem('documentsComplete', 'true');
+
+      // Notify via Brevo (through backend in production)
+      console.log('Brevo notification would be sent with docs meta', docsMeta);
+
+      renderUploadedList();
+      showAlert('Documents saved successfully! Proceeding to Assets...', true);
+      setTimeout(() => location.href = 'assets.html', 1500);
+    });
+
+    function renderUploadedList(){
+      const uploadedList = document.getElementById('uploadedList');
+      const docsMeta = JSON.parse(localStorage.getItem('documentsMeta') || '{}');
+      if (!Object.keys(docsMeta).length){
+        uploadedList.innerHTML = '<p>No documents uploaded yet.</p>';
+        return;
+      }
+      const sections = Object.keys(docsMeta).map(key => {
+        const rows = docsMeta[key].map(d => `<div class='doc-item'><span>${d.name}</span><span class='status uploaded'>Saved</span></div>`).join('');
+        return `<div class='card' style='padding:12px;margin:8px 0;'><h3 style='margin:8px 0;'>${key.toUpperCase()}</h3>${rows}</div>`;
+      }).join('');
+      uploadedList.innerHTML = sections;
+    }
+
+    function showAlert(msg, ok){
+      const a = document.getElementById('alert');
+      a.textContent = msg;
+      a.className = 'alert ' + (ok ? 'success' : '');
+      a.style.display = 'block';
+    }
+
+    function logout(){
+      localStorage.removeItem('isLoggedIn');
+      location.href = 'login.html';
+    }
+
+    renderUploadedList();
+  </script>
+</body>
+</html>
