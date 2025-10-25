@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Luvium Capital Onboarding Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo h1 {
+            color: #667eea;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        .logo p {
+            color: #666;
+            font-size: 14px;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: 500;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .required {
+            color: #e74c3c;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+        }
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+        .login-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        .alert {
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .alert.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .alert.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1>LUVIUM CAPITAL</h1>
+            <p>DEALERS SEAMLESS LIQUIDITY</p>
+        </div>
+        <h2>Create Your Account</h2>
+        <div id="alert" class="alert"></div>
+        <form id="registrationForm">
+            <div class="form-group">
+                <label>Company Name <span class="required">*</span></label>
+                <input type="text" id="companyName" required>
+            </div>
+            <div class="form-group">
+                <label>Registration Number <span class="required">*</span></label>
+                <input type="text" id="regNumber" required>
+            </div>
+            <div class="form-group">
+                <label>Contact Person <span class="required">*</span></label>
+                <input type="text" id="contactPerson" required>
+            </div>
+            <div class="form-group">
+                <label>Email Address <span class="required">*</span></label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label>Phone Number <span class="required">*</span></label>
+                <input type="tel" id="phone" required>
+            </div>
+            <div class="form-group">
+                <label>Password <span class="required">*</span></label>
+                <input type="password" id="password" required minlength="8">
+            </div>
+            <div class="form-group">
+                <label>Confirm Password <span class="required">*</span></label>
+                <input type="password" id="confirmPassword" required minlength="8">
+            </div>
+            <div class="form-group">
+                <label>Business Type <span class="required">*</span></label>
+                <select id="businessType" required>
+                    <option value="">Select business type</option>
+                    <option value="dealer">Car Dealer</option>
+                    <option value="retailer">Vehicle Retailer</option>
+                    <option value="wholesaler">Wholesaler</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <button type="submit" id="submitBtn">Create Account</button>
+        </form>
+        <div class="login-link">
+            Already have an account? <a href="login.html">Sign In</a>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('registrationForm');
+        const alert = document.getElementById('alert');
+        const submitBtn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                showAlert('Passwords do not match', 'error');
+                return;
+            }
+            
+            const formData = {
+                companyName: document.getElementById('companyName').value,
+                regNumber: document.getElementById('regNumber').value,
+                contactPerson: document.getElementById('contactPerson').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                password: password,
+                businessType: document.getElementById('businessType').value
+            };
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Creating Account...';
+            
+            try {
+                // Send email via Brevo API
+                await sendBrevoEmail(formData);
+                
+                // Store user data in localStorage (in production, use secure backend)
+                localStorage.setItem('userData', JSON.stringify(formData));
+                localStorage.setItem('isLoggedIn', 'true');
+                
+                showAlert('Account created successfully! Redirecting...', 'success');
+                
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 2000);
+            } catch (error) {
+                showAlert('Registration failed. Please try again.', 'error');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Create Account';
+            }
+        });
+
+        async function sendBrevoEmail(data) {
+            // Brevo API configuration
+            const BREVO_API_KEY = 'YOUR_BREVO_API_KEY'; // Replace with actual API key
+            const BREVO_API_URL = 'https://api.brevo.com/v3/smtp/email';
+            
+            const emailData = {
+                sender: {
+                    name: 'Luvium Capital',
+                    email: 'admin@luviumcapital.com'
+                },
+                to: [
+                    {
+                        email: data.email,
+                        name: data.contactPerson
+                    }
+                ],
+                subject: 'Welcome to Luvium Capital Onboarding Portal',
+                htmlContent: `
+                    <h2>Welcome to Luvium Capital!</h2>
+                    <p>Dear ${data.contactPerson},</p>
+                    <p>Thank you for registering with Luvium Capital. Your onboarding account has been created successfully.</p>
+                    <p><strong>Company Details:</strong></p>
+                    <ul>
+                        <li>Company Name: ${data.companyName}</li>
+                        <li>Registration Number: ${data.regNumber}</li>
+                        <li>Business Type: ${data.businessType}</li>
+                    </ul>
+                    <p>You can now access your dashboard and complete the onboarding process.</p>
+                    <p><a href="https://luvium.co.za/dashboard.html">Go to Dashboard</a></p>
+                    <p>If you have any questions, please contact us at admin@luviumcapital.com or call 061 589 2144.</p>
+                    <p>Best regards,<br>Luvium Capital Team</p>
+                `
+            };
+            
+            // Note: In production, API calls should be made through a backend server
+            // to keep API keys secure. This is a client-side demo.
+            console.log('Email would be sent via Brevo:', emailData);
+            
+            // Simulate API call
+            return new Promise((resolve) => {
+                setTimeout(resolve, 1000);
+            });
+        }
+
+        function showAlert(message, type) {
+            alert.textContent = message;
+            alert.className = `alert ${type}`;
+            alert.style.display = 'block';
+            
+            if (type === 'success') {
+                setTimeout(() => {
+                    alert.style.display = 'none';
+                }, 3000);
+            }
+        }
+    </script>
+</body>
+</html>
