@@ -3,129 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luvium Capital - Onboarding Portal</title>
+    <title>Luvium Capital | Onboarding Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/10.16.4/framer-motion.js"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-        header { background: #1a1a2e; color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.5rem; font-weight: bold; }
-        .logo-tagline { font-size: 0.8rem; opacity: 0.9; }
-        nav button { background: white; color: #1a1a2e; border: none; padding: 0.5rem 1rem; margin-left: 1rem; cursor: pointer; border-radius: 4px; }
-        nav button:hover { background: #f0f0f0; }
-        .hero { text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-        .hero p { font-size: 1.2rem; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto; }
-        .hero-buttons button { background: #4CAF50; color: white; border: none; padding: 1rem 2rem; margin: 0.5rem; font-size: 1rem; cursor: pointer; border-radius: 4px; }
-        .hero-buttons button:nth-child(2) { background: transparent; border: 2px solid white; }
-        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
-        .feature { padding: 1.5rem; border: 1px solid #ddd; border-radius: 8px; }
-        .feature h3 { color: #1a1a2e; margin-bottom: 0.5rem; }
-        .process { background: #f9f9f9; padding: 4rem 2rem; text-align: center; }
-        .process h2 { margin-bottom: 2rem; }
-        .steps { display: flex; justify-content: center; flex-wrap: wrap; gap: 2rem; max-width: 1000px; margin: 0 auto; }
-        .step { flex: 1; min-width: 150px; }
-        .step-number { background: #1a1a2e; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-weight: bold; }
-        .cta { background: #4CAF50; color: white; padding: 4rem 2rem; text-align: center; }
-        .cta button { background: white; color: #4CAF50; border: none; padding: 1rem 2rem; font-size: 1.1rem; cursor: pointer; border-radius: 4px; }
-        footer { background: #1a1a2e; color: white; padding: 2rem; text-align: center; }
-        footer .contact { margin: 1rem 0; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .hero-gradient { background: radial-gradient(circle at top right, #1e293b 0%, #0f172a 100%); }
+        .accent-gradient { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+        .card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .card-hover:hover { transform: translateY(-5px); border-color: rgba(59, 130, 246, 0.5); background: rgba(255, 255, 255, 0.05); }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
+        .float { animation: float 6s ease-in-out infinite; }
     </style>
 </head>
-<body>
-    <header>
-        <div>
-            <div class="logo">Luvium CAPITAL</div>
-            <div class="logo-tagline">DEALERS SEAMLESS LIQUIDITY</div>
+<body class="bg-[#0b1120] text-gray-200 selection:bg-blue-500/30">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass border-b border-white/5 top-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 accent-gradient rounded-xl flex items-center justify-center">
+                        <i class="fas fa-layer-group text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold tracking-tight text-white block leading-none">Luvium CAPITAL</span>
+                        <span class="text-[10px] uppercase tracking-[0.2em] text-blue-400 font-medium">Dealers Seamless Liquidity</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Solutions</a>
+                    <a href="#" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Resources</a>
+                    <a href="#" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Company</a>
+                    <div class="h-6 w-px bg-white/10 mx-2"></div>
+                    <a href="/login" class="text-sm font-medium text-gray-300 hover:text-white">Sign In</a>
+                    <a href="/register" class="px-5 py-2.5 rounded-full accent-gradient text-sm font-semibold text-white hover:shadow-lg hover:shadow-blue-500/20 transition-all">Get Started</a>
+                </div>
+            </div>
         </div>
-        <nav>
-            <button>Sign In</button>
-            <button>Get Started</button>
-        </nav>
-    </header>
+    </nav>
 
-    <section class="hero">
-        <h1>Welcome to Luvium Capital Onboarding Portal</h1>
-        <p>Streamline your dealership onboarding with our comprehensive portal. Complete your application, upload documents, and access financing solutions all in one secure platform.</p>
-        <div class="hero-buttons">
-            <button>Start Your Application</button>
-            <button>Learn More</button>
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 overflow-hidden hero-gradient">
+        <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-4xl mx-auto">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full glass border border-white/10 mb-8">
+                    <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                    <span class="text-xs font-medium text-blue-400">Next Generation Dealer Liquidity</span>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-8 leading-tight">
+                    Welcome to Luvium <span class="text-transparent bg-clip-text accent-gradient">Onboarding</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-400 mb-10 leading-relaxed max-w-2xl mx-auto">
+                    Streamline your dealership onboarding with our comprehensive portal. Access premium financing solutions and manage assets in one secure ecosystem.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="/register" class="w-full sm:w-auto px-8 py-4 rounded-full accent-gradient text-white font-bold shadow-xl shadow-blue-500/20 hover:scale-105 transition-transform">
+                        Start Your Application
+                    </a>
+                    <a href="#" class="w-full sm:w-auto px-8 py-4 rounded-full glass text-white font-semibold hover:bg-white/5 border border-white/10 transition-colors">
+                        Explore Solutions
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Decorative Elements -->
+        <div class="absolute top-1/4 -left-20 w-64 h-64 bg-blue-600/20 rounded-full blur-[100px] float"></div>
+        <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px] float" style="animation-delay: -3s"></div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="py-24 bg-[#0b1120]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="p-8 rounded-3xl glass card-hover group">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-6 group-hover:accent-gradient transition-all">
+                        <i class="fas fa-file-invoice text-blue-500 group-hover:text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Streamlined Documentation</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">Upload and manage all required business documents in one secure, unified location with automated verification.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="p-8 rounded-3xl glass card-hover group">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-6 group-hover:accent-gradient transition-all">
+                        <i class="fas fa-car-side text-blue-500 group-hover:text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Inventory Management</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">Track your vehicle inventory with detailed asset information, photos, and real-time valuation tools.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="p-8 rounded-3xl glass card-hover group">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-6 group-hover:accent-gradient transition-all">
+                        <i class="fas fa-shield-halved text-blue-500 group-hover:text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Secure & Compliant</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">Bank-grade security with full compliance to global regulatory requirements, ensuring your data stays protected.</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="features">
-        <div class="feature">
-            <h3>Streamlined Documentation</h3>
-            <p>Upload and manage all required business documents in one secure location</p>
-        </div>
-        <div class="feature">
-            <h3>Inventory Management</h3>
-            <p>Track your vehicle inventory with detailed asset information and photos</p>
-        </div>
-        <div class="feature">
-            <h3>Secure & Compliant</h3>
-            <p>Bank-grade security with full compliance to regulatory requirements</p>
-        </div>
-        <div class="feature">
-            <h3>Fast Processing</h3>
-            <p>Complete onboarding in 14 days or less with our automated workflow</p>
-        </div>
-        <div class="feature">
-            <h3>Competitive Financing</h3>
-            <p>Access to competitive financing rates and flexible terms</p>
-        </div>
-        <div class="feature">
-            <h3>Expert Support</h3>
-            <p>Dedicated support team to guide you through every step</p>
-        </div>
-    </section>
-
-    <section class="process">
-        <h2>Simple Onboarding Process</h2>
-        <p>Get started with our streamlined 5-step onboarding process</p>
-        <div class="steps">
-            <div class="step">
-                <div class="step-number">1</div>
-                <h3>Register Account</h3>
-                <p>Create your secure account</p>
-            </div>
-            <div class="step">
-                <div class="step-number">2</div>
-                <h3>Business Info</h3>
-                <p>Provide company details</p>
-            </div>
-            <div class="step">
-                <div class="step-number">3</div>
-                <h3>Upload Documents</h3>
-                <p>Submit required documents</p>
-            </div>
-            <div class="step">
-                <div class="step-number">4</div>
-                <h3>Asset Details</h3>
-                <p>Add inventory & assets</p>
-            </div>
-            <div class="step">
-                <div class="step-number">5</div>
-                <h3>Get Approved</h3>
-                <p>Receive financing approval</p>
+    <!-- CTA Section -->
+    <section class="py-20 relative overflow-hidden">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="accent-gradient rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden shadow-2xl shadow-blue-500/20">
+                <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10"></div>
+                <div class="relative z-10">
+                    <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Ready to scale your dealership?</h2>
+                    <p class="text-blue-100 text-lg mb-10 opacity-90">Join hundred of elite dealers already using Luvium Capital for their liquidity needs.</p>
+                    <a href="/register" class="inline-flex items-center px-8 py-4 bg-white text-blue-600 rounded-full font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all group">
+                        Begin Onboarding 
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="cta">
-        <h2>Ready to Get Started?</h2>
-        <p>Join hundreds of dealerships who trust Luvium Capital for their financing needs. Complete your onboarding today and unlock competitive financing solutions.</p>
-        <button>Start Your Application Now</button>
-    </section>
-
-    <footer>
-        <div class="logo">Luvium CAPITAL</div>
-        <div class="logo-tagline">DEALERS SEAMLESS LIQUIDITY</div>
-        <div class="contact">
-            <p>Contact us for support:</p>
-            <p>admin@luviumcapital.com | 061 589 2144</p>
-            <p>Bryanston, Sandton, 2021</p>
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+                <div class="flex items-center space-x-2 opacity-50">
+                    <div class="w-6 h-6 accent-gradient rounded flex items-center justify-center">
+                        <i class="fas fa-layer-group text-[10px] text-white"></i>
+                    </div>
+                    <span class="text-sm font-medium tracking-tight text-white uppercase tracking-wider">Luvium Capital</span>
+                </div>
+                <div class="text-gray-500 text-sm">
+                    © 2026 Luvium Holdings. All rights reserved.
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
         </div>
-        <p>© 2024 Luvium Capital. All rights reserved.</p>
     </footer>
 </body>
 </html>
