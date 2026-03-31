@@ -3,23 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luvium Capital | Onboarding Portal</title>
+    <title>Luvium | Dealers Seamless Liquidity</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/10.16.4/framer-motion.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #0b1120; color: #e2e8f0; }
         .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
-        .hero-gradient { background: radial-gradient(circle at top right, #1e293b 0%, #0f172a 100%); }
         .accent-gradient { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+        .gold-text { color: #fbbf24; }
         .card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .card-hover:hover { transform: translateY(-5px); border-color: rgba(59, 130, 246, 0.5); background: rgba(255, 255, 255, 0.05); }
         @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
         .float { animation: float 6s ease-in-out infinite; }
     </style>
 </head>
-<body class="bg-[#0b1120] text-gray-200 selection:bg-blue-500/30">
+<body class="selection:bg-blue-500/30">
     <!-- Navigation -->
     <nav class="fixed w-full z-50 glass border-b border-white/5 top-0">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,113 +33,198 @@
                     </div>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Solutions</a>
-                    <a href="#" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Resources</a>
-                    <a href="#" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Company</a>
-                    <div class="h-6 w-px bg-white/10 mx-2"></div>
-                    <a href="/login" class="text-sm font-medium text-gray-300 hover:text-white">Sign In</a>
-                    <a href="/register" class="px-5 py-2.5 rounded-full accent-gradient text-sm font-semibold text-white hover:shadow-lg hover:shadow-blue-500/20 transition-all">Get Started</a>
+                    <a href="#" class="text-sm font-medium hover:text-white transition-colors">Home</a>
+                    <a href="#why-us" class="text-sm font-medium hover:text-white transition-colors">Why Luvium</a>
+                    <a href="#faq" class="text-sm font-medium hover:text-white transition-colors">FAQ</a>
+                    <a href="/login.html" class="px-5 py-2.5 rounded-lg border border-white/10 hover:bg-white/5 transition-all text-sm font-semibold">Login</a>
+                    <a href="/register.html" class="px-5 py-2.5 rounded-lg accent-gradient text-white font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all text-sm">Get Started</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button class="text-gray-400 hover:text-white">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 overflow-hidden hero-gradient">
-        <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+    <section class="relative pt-32 pb-20 overflow-hidden min-h-screen flex items-center">
+        <!-- Abstract Background -->
+        <div class="absolute top-0 right-0 w-1/2 h-1/2 bg-blue-600/10 blur-[120px] -z-10 rounded-full"></div>
+        <div class="absolute bottom-0 left-0 w-1/3 h-1/3 bg-blue-900/20 blur-[100px] -z-10 rounded-full"></div>
+        
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center max-w-4xl mx-auto">
-                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full glass border border-white/10 mb-8">
-                    <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-                    <span class="text-xs font-medium text-blue-400">Next Generation Dealer Liquidity</span>
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full glass border border-white/10 mb-6">
+                    <span class="flex h-2 w-2 rounded-full bg-blue-500"></span>
+                    <span class="text-[10px] uppercase tracking-wider font-semibold text-blue-400">10+ Years of Automotive Excellence</span>
                 </div>
-                <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-8 leading-tight">
-                    Welcome to Luvium <span class="text-transparent bg-clip-text accent-gradient">Onboarding</span>
+                <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-tight">
+                    Unlocking Capital for <span class="gold-text">Underserved</span> Vehicle Dealerships
                 </h1>
-                <p class="text-lg md:text-xl text-gray-400 mb-10 leading-relaxed max-w-2xl mx-auto">
-                    Streamline your dealership onboarding with our comprehensive portal. Access premium financing solutions and manage assets in one secure ecosystem.
+                <p class="text-xl text-gray-400 mb-10 leading-relaxed max-w-3xl mx-auto">
+                    Luvium provides a scalable floor plan finance solution tailored for dealerships in rural and underserved regions. Experience agility that major banks simply can't match.
                 </p>
-                <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="/register" class="w-full sm:w-auto px-8 py-4 rounded-full accent-gradient text-white font-bold shadow-xl shadow-blue-500/20 hover:scale-105 transition-transform">
-                        Start Your Application
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="/register.html" class="w-full sm:w-auto px-8 py-4 accent-gradient text-white rounded-full font-bold shadow-lg hover:shadow-blue-500/40 hover:scale-105 transition-all flex items-center justify-center group">
+                        Begin Onboarding <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
                     </a>
-                    <a href="#" class="w-full sm:w-auto px-8 py-4 rounded-full glass text-white font-semibold hover:bg-white/5 border border-white/10 transition-colors">
-                        Explore Solutions
+                    <a href="#why-us" class="w-full sm:w-auto px-8 py-4 glass text-white rounded-full font-bold hover:bg-white/5 hover:scale-105 transition-all">
+                        Learn More
                     </a>
                 </div>
             </div>
         </div>
-        <!-- Decorative Elements -->
-        <div class="absolute top-1/4 -left-20 w-64 h-64 bg-blue-600/20 rounded-full blur-[100px] float"></div>
-        <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px] float" style="animation-delay: -3s"></div>
     </section>
 
-    <!-- Features Grid -->
-    <section class="py-24 bg-[#0b1120]">
+    <!-- Differentiation Section (Why us vs Banks) -->
+    <section id="why-us" class="py-24 relative border-t border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Card 1 -->
-                <div class="p-8 rounded-3xl glass card-hover group">
-                    <div class="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-6 group-hover:accent-gradient transition-all">
-                        <i class="fas fa-file-invoice text-blue-500 group-hover:text-white text-xl"></i>
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">Why Choose Luvium Over Major Banks?</h2>
+                    <p class="text-gray-400 mb-8 leading-relaxed">Traditional financial institutions often overlook small-to-medium dealers due to rigid criteria and slow bureaucratic processes. At Luvium, we've rebuilt floor plan financing from the ground up.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0 text-blue-500">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold">Speed of Execution</h4>
+                                <p class="text-sm text-gray-400">Where banks take weeks, we use AI-driven vetting to approve liquidity in days.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0 text-blue-500">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold">Dealer-Centric Flexibility</h4>
+                                <p class="text-sm text-gray-400">Our terms are designed for the realities of the rural automotive market, not institutional convenience.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0 text-blue-500">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold">Industry Roots</h4>
+                                <p class="text-sm text-gray-400">With 10+ years of history through Randgate and Westgate, we know the sector better than any bank.</p>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-4">Streamlined Documentation</h3>
-                    <p class="text-gray-400 leading-relaxed text-sm">Upload and manage all required business documents in one secure, unified location with automated verification.</p>
                 </div>
-                <!-- Card 2 -->
-                <div class="p-8 rounded-3xl glass card-hover group">
-                    <div class="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-6 group-hover:accent-gradient transition-all">
-                        <i class="fas fa-car-side text-blue-500 group-hover:text-white text-xl"></i>
+                <div class="relative">
+                    <div class="glass p-8 rounded-[2rem] relative z-10">
+                        <div class="accent-gradient w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-xl shadow-blue-500/20">
+                            <i class="fas fa-shield-halved text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Secure & Scalable</h3>
+                        <p class="text-gray-400 leading-relaxed mb-6">Our platform integrates seamlessly with your operations, providing real-time inventory tracking and automated liquidity management.</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center text-sm text-blue-400"><i class="fas fa-check-circle mr-2"></i> Bank-grade encryption</li>
+                            <li class="flex items-center text-sm text-blue-400"><i class="fas fa-check-circle mr-2"></i> POPIA Compliant</li>
+                            <li class="flex items-center text-sm text-blue-400"><i class="fas fa-check-circle mr-2"></i> Strivo AI Integration</li>
+                        </ul>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-4">Inventory Management</h3>
-                    <p class="text-gray-400 leading-relaxed text-sm">Track your vehicle inventory with detailed asset information, photos, and real-time valuation tools.</p>
-                </div>
-                <!-- Card 3 -->
-                <div class="p-8 rounded-3xl glass card-hover group">
-                    <div class="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-6 group-hover:accent-gradient transition-all">
-                        <i class="fas fa-shield-halved text-blue-500 group-hover:text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-4">Secure & Compliant</h3>
-                    <p class="text-gray-400 leading-relaxed text-sm">Bank-grade security with full compliance to global regulatory requirements, ensuring your data stays protected.</p>
+                    <div class="absolute -top-4 -right-4 w-64 h-64 bg-blue-500/10 blur-3xl -z-10 rounded-full"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="py-20 relative overflow-hidden">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="accent-gradient rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden shadow-2xl shadow-blue-500/20">
-                <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10"></div>
-                <div class="relative z-10">
-                    <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Ready to scale your dealership?</h2>
-                    <p class="text-blue-100 text-lg mb-10 opacity-90">Join hundred of elite dealers already using Luvium Capital for their liquidity needs.</p>
-                    <a href="/register" class="inline-flex items-center px-8 py-4 bg-white text-blue-600 rounded-full font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all group">
-                        Begin Onboarding 
-                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
-                    </a>
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 bg-black/20">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Frequently Asked Questions</h2>
+                <p class="text-gray-400">Everything you need to know about Luvium Floor Plan Financing.</p>
+            </div>
+            
+            <div class="space-y-4">
+                <details class="glass rounded-2xl p-6 group cursor-pointer">
+                    <summary class="flex justify-between items-center text-white font-bold list-none">
+                        What is floor plan financing?
+                        <i class="fas fa-chevron-down transition-transform group-open:rotate-180"></i>
+                    </summary>
+                    <p class="mt-4 text-gray-400 text-sm leading-relaxed">It is a revolving line of credit that allows dealerships to purchase inventory (vehicles). The credit line is secured by the inventory itself, freeing up your operational cash flow.</p>
+                </details>
+                
+                <details class="glass rounded-2xl p-6 group cursor-pointer">
+                    <summary class="flex justify-between items-center text-white font-bold list-none">
+                        How do I qualify for a credit line?
+                        <i class="fas fa-chevron-down transition-transform group-open:rotate-180"></i>
+                    </summary>
+                    <p class="mt-4 text-gray-400 text-sm leading-relaxed">We look at your dealership'\''s sales history, inventory turnover, and market location. Our AI-driven onboarding process minimizes paperwork and speeds up approval.</p>
+                </details>
+                
+                <details class="glass rounded-2xl p-6 group cursor-pointer">
+                    <summary class="flex justify-between items-center text-white font-bold list-none">
+                        Which regions do you cover?
+                        <i class="fas fa-chevron-down transition-transform group-open:rotate-180"></i>
+                    </summary>
+                    <p class="mt-4 text-gray-400 text-sm leading-relaxed">While we operate across South Africa, our primary mission is to support dealerships in rural and underserved areas that are often neglected by major metropolitan banks.</p>
+                </details>
+
+                <details class="glass rounded-2xl p-6 group cursor-pointer">
+                    <summary class="flex justify-between items-center text-white font-bold list-none">
+                        Is there a minimum turnover requirement?
+                        <i class="fas fa-chevron-down transition-transform group-open:rotate-180"></i>
+                    </summary>
+                    <p class="mt-4 text-gray-400 text-sm leading-relaxed">We assess each dealer individually. Our goal is to empower growth, so we consider your potential and local market dynamics alongside historical data.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brevo Integration / Newsletter -->
+    <section class="py-24 border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="glass p-12 rounded-[3rem] text-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-blue-600/5 -z-10"></div>
+                <h2 class="text-3xl font-bold text-white mb-4">Stay Informed</h2>
+                <p class="text-gray-400 mb-8 max-w-lg mx-auto">Get the latest insights on market trends, capital allocation updates, and dealer success strategies.</p>
+                
+                <div id="brevo-form-container">
+                    <!-- Brevo Signup Form Placeholder -->
+                    <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                        <input type="email" placeholder="Enter your business email" class="flex-1 bg-white/5 border border-white/10 rounded-full px-6 py-4 text-white focus:outline-none focus:border-blue-500 transition-colors" required>
+                        <button type="submit" class="accent-gradient px-8 py-4 rounded-full font-bold text-white shadow-lg hover:shadow-blue-500/30 transition-all">
+                            Join Now
+                                                </button>
+                    </form>
+                    <p class="text-[10px] text-gray-500 mt-4">By joining, you agree to our privacy policy and communications. Powered by Brevo.</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- CTA Footer Section -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-white mb-8">Ready to grow your inventory?</h2>
+            <a href="/register.html" class="inline-flex items-center px-10 py-5 accent-gradient text-white rounded-full font-bold shadow-xl hover:shadow-blue-500/40 hover:scale-105 transition-all group">
+                Apply for Financing <i class="fas fa-rocket ml-3 group-hover:-translate-y-1 transition-transform"></i>
+            </a>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="py-12 border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
-                <div class="flex items-center space-x-2 opacity-50">
-                    <div class="w-6 h-6 accent-gradient rounded flex items-center justify-center">
-                        <i class="fas fa-layer-group text-[10px] text-white"></i>
-                    </div>
-                    <span class="text-sm font-medium tracking-tight text-white uppercase tracking-wider">Luvium Capital</span>
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex flex-col items-center space-y-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-layer-group text-blue-500"></i>
+                    <span class="text-white font-bold">Luvium Holdings</span>
                 </div>
-                <div class="text-gray-500 text-sm">
-                    © 2026 Luvium Holdings. All rights reserved.
-                </div>
+                <p class="text-gray-500 text-sm">&copy; 2026 Luvium Holdings (Pty) Ltd. All rights reserved.</p>
                 <div class="flex space-x-6">
-                    <a href="#" class="text-gray-500 hover:text-white transition-colors"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" class="text-gray-500 hover:text-white transition-colors"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="text-gray-500 hover:text-white transition-colors"><i class="fab fa-github"></i></a>
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors text-sm">Privacy</a>
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors text-sm">Terms</a>
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors text-sm">Contact</a>
                 </div>
             </div>
         </div>
