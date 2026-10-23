@@ -1,0 +1,39 @@
+<!--{"title":"Begin Onboarding | Luvium","desc":"Apply for dealer floor plan financing with Luvium. Tell us about your dealership and we will be in touch.","path":"/register.html"}-->
+<main class="page" id="main">
+  <div class="wrap">
+    <div class="page-card">
+      <h1 class="display">Begin Onboarding</h1>
+      <p class="lede">Tell us about your dealership. Our AI-driven onboarding keeps paperwork to a minimum.</p>
+      <form data-endpoint="/api/enquiry" data-subject="Dealer application from luvium.co.za" data-success="Application received. We will be in touch shortly." method="post" novalidate>
+        <div class="grid2">
+          <div class="fgroup"><label for="r-company">Company Name</label><input class="input" id="r-company" name="organisation" type="text" autocomplete="organization" maxlength="120" required></div>
+          <div class="fgroup"><label for="r-reg">Registration Number</label><input class="input" id="r-reg" name="regNumber" type="text" maxlength="40" required></div>
+        </div>
+        <div class="fgroup"><label for="r-name">Contact Person</label><input class="input" id="r-name" name="name" type="text" autocomplete="name" maxlength="100" required></div>
+        <div class="grid2">
+          <div class="fgroup"><label for="r-email">Email Address</label><input class="input" id="r-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required></div>
+          <div class="fgroup"><label for="r-phone">Phone Number</label><input class="input" id="r-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30" required></div>
+        </div>
+        <div class="grid2">
+          <div class="fgroup"><label for="r-type">Business Type</label>
+            <select class="input" id="r-type" name="type" required>
+              <option value="" disabled selected>Select one</option>
+              <option>Car Dealer</option>
+              <option>Vehicle Retailer</option>
+              <option>Wholesaler</option>
+              <option>Other</option>
+            </select></div>
+          <div class="fgroup"><label for="r-region">Region <span class="opt">(optional)</span></label><input class="input" id="r-region" name="region" type="text" autocomplete="address-level1" maxlength="80"></div>
+        </div>
+        <div class="fgroup"><label for="r-sales">Monthly vehicle sales <span class="opt">(optional)</span></label><input class="input" id="r-sales" name="salesRange" type="text" maxlength="60" placeholder="e.g. 15 to 20 units"></div>
+        <div class="fgroup"><label for="r-msg">Anything else we should know <span class="opt">(optional)</span></label><textarea class="input" id="r-msg" name="message" rows="4" maxlength="2000"></textarea></div>
+        <div class="hp" aria-hidden="true"><label for="r-website">Leave this field empty</label><input id="r-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+        <label class="consent"><input type="checkbox" name="consent" value="yes" required><span>I agree to Luvium contacting me about this application and to the <a href="/privacy.html">privacy policy</a>.</span></label>
+        <button class="btn big" type="submit">Begin Onboarding <svg class="ico" aria-hidden="true"><use href="/img/icons.svg#i-arrow-right"/></svg></button>
+        <div class="msg" role="status" aria-live="polite"></div>
+        <noscript><p class="fine">JavaScript is off. Please email <a href="mailto:admin@luviumcapital.com">admin@luviumcapital.com</a> instead.</p></noscript>
+      </form>
+      <p class="fine gap">Already a dealer partner? <a href="/login.html">Sign in</a>.</p>
+    </div>
+  </div>
+</main>

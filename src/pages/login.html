@@ -1,0 +1,20 @@
+<!--{"title":"Sign In | Luvium","desc":"Luvium dealer portal sign in. Request access while the portal opens.","path":"/login.html","robots":"noindex,follow"}-->
+<main class="page" id="main">
+  <div class="wrap">
+    <div class="page-card">
+      <h1 class="display">Sign In to Your Account</h1>
+      <p class="lede">The dealer portal is opening soon. Request access and we will let you know the moment your account is ready.</p>
+      <form data-endpoint="/api/enquiry" data-subject="Portal access request from luvium.co.za" data-success="Request received. We will email you when the portal opens." method="post" novalidate>
+        <div class="fgroup"><label for="l-name">Your name</label><input class="input" id="l-name" name="name" type="text" autocomplete="name" maxlength="100" required></div>
+        <div class="fgroup"><label for="l-email">Email Address</label><input class="input" id="l-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required></div>
+        <div class="fgroup"><label for="l-org">Dealership <span class="opt">(optional)</span></label><input class="input" id="l-org" name="organisation" type="text" autocomplete="organization" maxlength="120"></div>
+        <div class="hp" aria-hidden="true"><label for="l-website">Leave this field empty</label><input id="l-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+        <label class="consent"><input type="checkbox" name="consent" value="yes" required><span>I agree to the <a href="/privacy.html">privacy policy</a>.</span></label>
+        <button class="btn big" type="submit">Request Access <svg class="ico" aria-hidden="true"><use href="/img/icons.svg#i-arrow-right"/></svg></button>
+        <div class="msg" role="status" aria-live="polite"></div>
+        <noscript><p class="fine">JavaScript is off. Please email <a href="mailto:admin@luviumcapital.com">admin@luviumcapital.com</a> instead.</p></noscript>
+      </form>
+      <p class="fine gap">Don't have an account? <a href="/register.html">Register Now</a><br><a href="/">&larr; Back to Home</a></p>
+    </div>
+  </div>
+</main>

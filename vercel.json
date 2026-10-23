@@ -1,0 +1,48 @@
+{
+    "cleanUrls":  false,
+    "trailingSlash":  false,
+    "headers":  [
+                    {
+                        "source":  "/(.*)",
+                        "headers":  [
+                                        {
+                                            "key":  "Content-Security-Policy",
+                                            "value":  "default-src \u0027self\u0027; script-src \u0027self\u0027; style-src \u0027self\u0027; img-src \u0027self\u0027 data:; font-src \u0027self\u0027; connect-src \u0027self\u0027; form-action \u0027self\u0027 mailto:; frame-ancestors \u0027none\u0027; base-uri \u0027self\u0027"
+                                        },
+                                        {
+                                            "key":  "X-Content-Type-Options",
+                                            "value":  "nosniff"
+                                        },
+                                        {
+                                            "key":  "Referrer-Policy",
+                                            "value":  "strict-origin-when-cross-origin"
+                                        },
+                                        {
+                                            "key":  "X-Frame-Options",
+                                            "value":  "DENY"
+                                        },
+                                        {
+                                            "key":  "Permissions-Policy",
+                                            "value":  "camera=(), microphone=(), geolocation=()"
+                                        },
+                                        {
+                                            "key":  "Strict-Transport-Security",
+                                            "value":  "max-age=63072000; includeSubDomains"
+                                        }
+                                    ]
+                    },
+                    {
+                        "source":  "/fonts/(.*)",
+                        "headers":  [
+                                        {
+                                            "key":  "Cache-Control",
+                                            "value":  "public, max-age=31536000, immutable"
+                                        }
+                                    ]
+                    }
+                ],
+    "framework":  null,
+    "buildCommand":  "echo static",
+    "installCommand":  "echo static",
+    "outputDirectory":  "."
+}

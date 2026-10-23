@@ -1,0 +1,25 @@
+<!--{"title":"Contact | Luvium","desc":"Contact Luvium Holdings in Bryanston, Johannesburg. Floor plan finance for dealerships.","path":"/contact.html"}-->
+<main class="page" id="main">
+  <div class="wrap contact-grid">
+    <div>
+      <h1 class="display">Contact</h1>
+      <p class="lede">Questions about floor plan finance, onboarding or the dealer portal. Write to us and a person will reply.</p>
+      <ul class="checks">
+        <li><svg class="ico" aria-hidden="true"><use href="/img/icons.svg#i-envelope-simple"/></svg><a href="mailto:admin@luviumcapital.com">admin@luviumcapital.com</a></li>
+        <li><svg class="ico" aria-hidden="true"><use href="/img/icons.svg#i-map-pin"/></svg><span>456 Cypress, Cnr Vale and Cypress Avenue, Bryanston, 2021</span></li>
+      </ul>
+    </div>
+    <div class="page-card flat">
+      <form data-endpoint="/api/enquiry" data-subject="Contact message from luvium.co.za" data-success="Message sent. Thank you." method="post" novalidate>
+        <div class="fgroup"><label for="c-name">Name</label><input class="input" id="c-name" name="name" type="text" autocomplete="name" maxlength="100" required></div>
+        <div class="fgroup"><label for="c-email">Email Address</label><input class="input" id="c-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required></div>
+        <div class="fgroup"><label for="c-msg">Message</label><textarea class="input" id="c-msg" name="message" rows="5" maxlength="2000" required></textarea></div>
+        <div class="hp" aria-hidden="true"><label for="c-website">Leave this field empty</label><input id="c-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+        <label class="consent"><input type="checkbox" name="consent" value="yes" required><span>I agree to the <a href="/privacy.html">privacy policy</a>.</span></label>
+        <button class="btn" type="submit">Send message <svg class="ico" aria-hidden="true"><use href="/img/icons.svg#i-arrow-right"/></svg></button>
+        <div class="msg" role="status" aria-live="polite"></div>
+        <noscript><p class="fine">JavaScript is off. Please email <a href="mailto:admin@luviumcapital.com">admin@luviumcapital.com</a> instead.</p></noscript>
+      </form>
+    </div>
+  </div>
+</main>
