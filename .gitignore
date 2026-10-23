@@ -1,3 +1,5 @@
 deploy.log
 .vercel
 .env.local
+
+deploy.log
