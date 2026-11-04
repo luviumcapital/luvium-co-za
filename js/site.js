@@ -4,7 +4,7 @@
   'use strict';
   var doc = document;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var MAIL = 'dealers@luvium.co.za';
+  var MAIL = 'admin@luviumcapital.com';
 
   function $(s, c) { return (c || doc).querySelector(s); }
   function $all(s, c) { return Array.prototype.slice.call((c || doc).querySelectorAll(s)); }
